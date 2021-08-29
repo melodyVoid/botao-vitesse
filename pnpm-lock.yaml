@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@3dgl/utils': ^1.0.0
+  '@3dgl/utils': 1.0.2
   '@antfu/eslint-config': ^0.7.0
   '@iconify/json': ^1.1.393
   '@intlify/vite-plugin-vue-i18n': ^2.4.0
@@ -39,7 +39,7 @@ specifiers:
   vue-tsc: ^0.3.0
 
 dependencies:
-  '@3dgl/utils': 1.0.0
+  '@3dgl/utils': 1.0.2
   '@vueuse/core': 6.0.0_vue@3.2.6
   '@vueuse/head': 0.6.0_vue@3.2.6
   nprogress: 0.2.0
@@ -80,10 +80,8 @@ devDependencies:
 
 packages:
 
-  /@3dgl/utils/1.0.0:
-    resolution: {integrity: sha512-h4OodYFUc5MPi3XkzoSD+ms7C/LGE8t9Bmk8sOp/brtjNKdnEmK0VY0/praw/zgtdPUAutpYIqnbPLrjrUtEdQ==}
-    dependencies:
-      typescript: 4.4.2
+  /@3dgl/utils/1.0.2:
+    resolution: {integrity: sha512-gRMTU2xviQdHxp0jw/trY9+NznyRFJ3K5c71a6C3nKlQGn4BGCiQXkSV1YgriEpJuKayD1xKaNqLAAxxkwEjxg==}
     dev: false
 
   /@antfu/eslint-config-basic/0.7.0_eslint@7.32.0:
@@ -5836,12 +5834,6 @@ packages:
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
-
-  /typescript/4.4.2:
-    resolution: {integrity: sha512-gzP+t5W4hdy4c+68bfcv0t400HVJMMd2+H9B7gae1nQlBzCqvrXX+6GL/b3GAgyTH966pzrZ70/fRjwAtZksSQ==}
-    engines: {node: '>=4.2.0'}
-    hasBin: true
-    dev: false
 
   /uc.micro/1.0.6:
     resolution: {integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==}

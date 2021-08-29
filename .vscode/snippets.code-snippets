@@ -44,8 +44,8 @@
       "  </ShowGL>",
       "</template>",
       "<route lang=\"yaml\">",
-      "  meta:",
-      "    layout: empty",
+      "meta:",
+      "  layout: empty",
       "</route>"
     ]
   }

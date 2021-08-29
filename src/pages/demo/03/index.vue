@@ -43,7 +43,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <ShowGL title="优化绘制一个点">
+  <ShowGL title="优化绘制一个点（代码优化）">
     <template #canvas>
       <canvas ref="canvas" width="400" height="400" class="w-80 sm:w-[400px]"></canvas>
     </template>

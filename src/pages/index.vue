@@ -4,6 +4,7 @@ const demos = [
   { title: '01-第一个 WebGL 程序：清空绘图区', path: '/demo/01' },
   { title: '02-绘制一个点', path: '/demo/02' },
   { title: '03-绘制一个点（优化代码）', path: '/demo/03' },
+  { title: '04-绘制多个点', path: '/demo/04' },
 ]
 
 </script>
