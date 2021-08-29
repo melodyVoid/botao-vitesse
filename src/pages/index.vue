@@ -9,7 +9,7 @@ const demos = [
 <template>
   <div>
     <p class="text-4xl font-thin italic flex items-center justify-center">
-      <simple-icons:webgl class="inline-block text-6xl mr-4" /> demo
+      <simple-icons:webgl class="inline-block text-6xl mr-4" /> demos
     </p>
 
     <ul>
