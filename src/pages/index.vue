@@ -5,6 +5,7 @@ const demos = [
   { title: '02-绘制一个点', path: '/demo/02' },
   { title: '03-绘制一个点（优化代码）', path: '/demo/03' },
   { title: '04-绘制多个点', path: '/demo/04' },
+  { title: '05-绘制三角形', path: '/demo/05' },
 ]
 
 </script>
@@ -16,7 +17,7 @@ const demos = [
     </p>
 
     <ul class="text-left mx-auto w-80">
-      <li v-for="(item, index) of demos" :key="index" class="text-gray-400 hover:text-gray-600">
+      <li v-for="(item, index) of demos" :key="index" class="my-1 text-gray-400 hover:text-gray-600">
         <router-link :to="item.path">
           {{ item.title }}
         </router-link>
