@@ -10,13 +10,10 @@ onMounted(() => {
 
   if (gl === null)
     throw new Error('fail to get rendering context of WebGL')
-
-  gl.clearColor(0.0, 0.0, 0.0, 0.1)
-  gl.clear(gl.COLOR_BUFFER_BIT)
 })
 </script>
 <template>
-  <ShowGL title="清空绘图区">
+  <ShowGL title="优化绘制一个点">
     <template #canvas>
       <canvas ref="canvas" width="400" height="400" class="w-80 sm:w-[400px]"></canvas>
     </template>
@@ -25,7 +22,3 @@ onMounted(() => {
     </template>
   </ShowGL>
 </template>
-<route lang="yaml">
-meta:
-  layout: empty
-</route>
