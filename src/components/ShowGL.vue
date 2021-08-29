@@ -8,7 +8,7 @@ const props = defineProps<{ title: string }>()
       <span class="text-gray-500 mt-4">{{ props.title }}</span>
       <GoBack />
     </div>
-    <div class="mx-4 box-border flex items-center overflow-y-scroll overflow-x-scroll my-6 overflow-hidden lg:h-[calc(100vh-3rem-70px)]">
+    <div class="mx-4 box-border flex items-center overflow-y-scroll my-6 overflow-hidden lg:h-[calc(100vh-3rem-70px)]">
       <slot name="readme"></slot>
     </div>
   </div>
