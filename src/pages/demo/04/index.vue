@@ -88,7 +88,7 @@ onMounted(() => {
     color: { r: number; g: number; b: number; a: number }
   }> = []
 
-  canvas.value.addEventListener('click', (e) => {
+  canvas.value.addEventListener('click', e => {
     const x = e.offsetX
     const y = e.offsetY
     const color = randomColor()

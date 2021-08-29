@@ -1,9 +1,16 @@
 <script setup lang="ts">
-import { createProgram, createShader, getWebGLContext } from '@3dgl/utils'
+import {
+  createProgram,
+  createShader,
+  getWebGLContext,
+  randomColor,
+} from '@3dgl/utils'
 import README from './README.md'
 const canvas = ref<HTMLCanvasElement | null>(null)
 
 onMounted(() => {
+  if (canvas.value === null) throw new Error('canvas is null')
+
   const gl = getWebGLContext(canvas.value as HTMLCanvasElement)
 
   /**
@@ -12,8 +19,11 @@ onMounted(() => {
   const VERTEX_SHADER_SOURCE = `
     precision mediump float;
     attribute vec2 a_Position;
+    attribute vec2 a_Screen_Size;
     void main() {
-      gl_Position = vec4(a_Position, 0, 1);
+      vec2 position = (a_Position / a_Screen_Size) * 2.0 - 1.0;
+      position = position * vec2(1.0, -1.0);
+      gl_Position = vec4(position, 0.0, 1.0);
     }
   `
 
@@ -45,24 +55,27 @@ onMounted(() => {
   gl.useProgram(program)
 
   /**
-   * 清空绘图区
-   */
-  gl.clearColor(0.0, 0.0, 0.0, 0.1)
-  gl.clear(gl.COLOR_BUFFER_BIT)
-
-  /**
    * 找到顶点着色器中的变量 a_Position
    */
   const a_Position = gl.getAttribLocation(program, 'a_Position')
+  /**
+   * 找到顶点着色器中的变量 a_Screen_Size
+   */
+  const a_Screen_Size = gl.getAttribLocation(program, 'a_Screen_Size')
   /**
    * 找到片元着色器中的变量 u_Color
    */
   const u_Color = gl.getUniformLocation(program, 'u_Color')
 
   /**
+   * 为顶点着色器中的 a_Screen_Size 传递 canvas 的宽高信息
+   */
+  gl.vertexAttrib2f(a_Screen_Size, canvas.value.width, canvas.value.height)
+
+  /**
    * 顶点数据
    */
-  const positions = new Float32Array([0.0, 0.0, -1.0, -1.0, 1.0, -1.0])
+  const positions: number[] = []
 
   /**
    * 创建缓冲区
@@ -72,11 +85,6 @@ onMounted(() => {
    * 绑定缓冲区
    */
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
-
-  /**
-   * 向当前缓冲区写入数据
-   */
-  gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW)
 
   // 每次取两个数据
   const size = 2
@@ -97,17 +105,49 @@ onMounted(() => {
   gl.enableVertexAttribArray(a_Position)
 
   /**
-   * 设置颜色
+   * 清空绘图区
    */
-  gl.uniform4f(u_Color, 15, 118, 110, 1)
+  gl.clearColor(0.0, 0.0, 0.0, 0.1)
+  gl.clear(gl.COLOR_BUFFER_BIT)
+
   /**
-   * 画三角形
+   * 点击 canvas
    */
-  gl.drawArrays(gl.TRIANGLES, 0, 3)
+  canvas.value.addEventListener('click', e => {
+    const x = e.offsetX
+    const y = e.offsetY
+    // 两个坐标为一组
+    positions.push(x, y)
+
+    /**
+     * 顶点信息为 6 个数据即 3 个顶点时执行绘制操作，因为三角形由三个顶点组成。
+     */
+    if (positions.length % 6 === 0) {
+      /**
+       * 向当前缓冲区写入数据
+       */
+      gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array(positions),
+        gl.STATIC_DRAW,
+      )
+      /**
+       * 设置颜色
+       */
+      const { r, g, b, a } = randomColor()
+      gl.uniform4f(u_Color, r, g, b, a)
+
+      gl.clear(gl.COLOR_BUFFER_BIT)
+      /**
+       * 画三角形
+       */
+      gl.drawArrays(gl.TRIANGLES, 0, positions.length / 2)
+    }
+  })
 })
 </script>
 <template>
-  <ShowGL title="绘制三角形">
+  <ShowGL title="动态绘制三角形（鼠标点击三下）">
     <template #canvas>
       <canvas
         ref="canvas"

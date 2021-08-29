@@ -6,6 +6,7 @@ const demos = [
   { title: '03-绘制一个点（优化代码）', path: '/demo/03' },
   { title: '04-绘制多个点', path: '/demo/04' },
   { title: '05-绘制三角形', path: '/demo/05' },
+  { title: '06-动态绘制三角形', path: '/demo/06' },
 ]
 
 </script>

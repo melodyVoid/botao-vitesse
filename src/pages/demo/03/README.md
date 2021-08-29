@@ -44,7 +44,7 @@ export const getWebGLContext = (element: HTMLElement | null) => {
 export const createShader = (
   gl: WebGLRenderingContext,
   type: number,
-  source: string
+  source: string,
 ): WebGLShader => {
   // 创建着色器对象
   const shader = gl.createShader(type)
@@ -83,8 +83,8 @@ export const createShader = (
 export const createProgram = (
   gl: WebGLRenderingContext,
   vertexShader: WebGLShader,
-  fragShader: WebGLShader
-): WebGLProgram => {
+  fragShader: WebGLShader,
+): { program: WebGLProgram } => {
   // 创建程序
   const program = gl.createProgram()
 
