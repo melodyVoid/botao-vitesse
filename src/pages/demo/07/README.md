@@ -143,13 +143,13 @@ gl.clear(gl.COLOR_BUFFER_BIT)
 /**
  * 点击 canvas 动态绘制线段
  */
-canvas.value.addEventListener('click', e => {
+canvas.addEventListener('click', e => {
   const x = e.offsetX
   const y = e.offsetY
   // 两个坐标为一组
   positions.push(x, y)
 
-  if (positions.value.length > 0) {
+  if (positions.length > 0) {
     /**
      * 向当前缓冲区写入数据
      */
