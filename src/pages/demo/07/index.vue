@@ -2,12 +2,30 @@
 import { createProgram, createShader, getWebGLContext } from '@3dgl/utils'
 import README from './README.md'
 const canvas = ref<HTMLCanvasElement | null>(null)
+const glType = ref<number>(0)
+const glRef = ref<WebGLRenderingContext | null>(null)
+const positions = ref<number[]>([])
 
+const handleChangeGlType = (
+  gl: WebGLRenderingContext | null,
+  type: 'LINES' | 'LINE_STRIP' | 'LINE_LOOP',
+) => {
+  if (gl === null) throw new Error('fail to get rendering context of WebGL')
+  const typeMap = {
+    LINES: gl.LINES,
+    LINE_STRIP: gl.LINE_STRIP,
+    LINE_LOOP: gl.LINE_LOOP,
+  }
+  gl.clear(gl.COLOR_BUFFER_BIT)
+  positions.value = []
+  glType.value = typeMap[type]
+}
 onMounted(() => {
   if (canvas.value === null) throw new Error('canvas is null')
 
   const gl = getWebGLContext(canvas.value)
-
+  glRef.value = gl
+  glType.value = gl.LINES
   /**
    * 定义顶点着色器
    */
@@ -26,10 +44,10 @@ onMounted(() => {
    */
   const FRAG_SHADER_SOURCE = `
     precision mediump float;
-		uniform vec4 u_Color;
-		void main() {
-			gl_FragColor = u_Color / vec4(255, 255, 255, 1);
-		}
+    uniform vec4 u_Color;
+    void main() {
+      gl_FragColor = u_Color / vec4(255, 255, 255, 1);
+    }
   `
 
   /**
@@ -53,8 +71,6 @@ onMounted(() => {
    * 为顶点着色器中的 a_Screen_Size 传递 canvas 的宽高信息
    */
   gl.vertexAttrib2f(a_Screen_Size, canvas.value.width, canvas.value.height)
-
-  const positions: number[] = []
 
   /**
    * 创建缓冲区
@@ -97,15 +113,15 @@ onMounted(() => {
     const x = e.offsetX
     const y = e.offsetY
     // 两个坐标为一组
-    positions.push(x, y)
+    positions.value.push(x, y)
 
-    if (positions.length > 0) {
+    if (positions.value.length > 0) {
       /**
        * 向当前缓冲区写入数据
        */
       gl.bufferData(
         gl.ARRAY_BUFFER,
-        new Float32Array(positions),
+        new Float32Array(positions.value),
         gl.STATIC_DRAW,
       )
       /**
@@ -116,7 +132,7 @@ onMounted(() => {
       /**
        * 绘制线段
        */
-      gl.drawArrays(gl.LINES, 0, positions.length / 2)
+      gl.drawArrays(glType.value, 0, positions.value.length / 2)
     }
   })
 })
@@ -124,6 +140,26 @@ onMounted(() => {
 <template>
   <ShowGL title="绘制线段（鼠标点击）">
     <template #canvas>
+      <div v-if="glRef !== null" class="flex justify-start gap-3">
+        <button
+          class="btn my-3 text-sm mt-8 !outline-transparent"
+          @click="handleChangeGlType(glRef, 'LINES')"
+        >
+          线段
+        </button>
+        <button
+          class="btn my-3 text-sm mt-8 !outline-none"
+          @click="handleChangeGlType(glRef, 'LINE_STRIP')"
+        >
+          线段带
+        </button>
+        <button
+          class="btn my-3 text-sm mt-8 !outline-none"
+          @click="handleChangeGlType(glRef, 'LINE_LOOP')"
+        >
+          线段环
+        </button>
+      </div>
       <canvas
         ref="canvas"
         width="400"

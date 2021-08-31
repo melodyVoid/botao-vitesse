@@ -66,6 +66,7 @@ canvas.addEventListener('click', e => {
 ## 完整代码
 
 ```js
+import { createProgram, createShader, getWebGLContext } from '@3dgl/utils'
 /**
  * 获取 canvas 元素
  */
