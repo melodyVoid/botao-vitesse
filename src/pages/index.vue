@@ -9,6 +9,7 @@ const demos = [
   { title: '06-动态绘制三角形', path: '/demo/06' },
   { title: '07-绘制线段', path: '/demo/07' },
   { title: '08-绘制渐变三角形（两个缓冲区）', path: '/demo/08' },
+  { title: '09-绘制渐变三角形（一个缓冲区）', path: '/demo/09' },
 ]
 
 </script>
