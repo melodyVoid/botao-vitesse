@@ -8,7 +8,7 @@
     "preview-https": "serve dist"
   },
   "dependencies": {
-    "@3dgl/utils": "1.0.2",
+    "@3dgl/utils": "1.0.3",
     "@vueuse/core": "^6.0.0",
     "@vueuse/head": "^0.6.0",
     "nprogress": "^0.2.0",

@@ -4,6 +4,7 @@ import {
   createShader,
   getWebGLContext,
   randomColor,
+  createBuffer,
 } from '@3dgl/utils'
 import README from './README.md'
 const canvas = ref<HTMLCanvasElement | null>(null)
@@ -67,35 +68,12 @@ onMounted(() => {
   /**
    * 创建坐标信息 buffer
    */
-  const positionBuffer = gl.createBuffer()
-
-  /**
-   * 将当前 buffer 设置为 postionBuffer，接下来对 buffer 的操作都是针对 positionBuffer 了
-   */
-  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer)
-
-  /**
-   * 设置 a_Position 变量读取 positionBuffer 缓冲区的方式。
-   */
-  gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0)
-
-  gl.enableVertexAttribArray(a_Position)
+  const positionBuffer = createBuffer(gl, a_Position, { size: 2 })
 
   /**
    * 创建颜色信息 buffer
    */
-  const colorBuffer = gl.createBuffer()
-
-  /**
-   * 将当前 buffer 设置为 colorBuffer
-   */
-  gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer)
-  /**
-   * 设置 a_Color 变量读取 colorBuffer 缓冲区的方式。
-   */
-  gl.vertexAttribPointer(a_Color, 4, gl.FLOAT, false, 0, 0)
-
-  gl.enableVertexAttribArray(a_Color)
+  const colorBuffer = createBuffer(gl, a_Color, { size: 4 })
 
   gl.clearColor(0.0, 0.0, 0.0, 0.1)
   gl.clear(gl.COLOR_BUFFER_BIT)

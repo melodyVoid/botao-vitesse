@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@3dgl/utils': 1.0.2
+  '@3dgl/utils': 1.0.3
   '@antfu/eslint-config': ^0.7.0
   '@iconify/json': ^1.1.393
   '@intlify/vite-plugin-vue-i18n': ^2.4.0
@@ -39,7 +39,7 @@ specifiers:
   vue-tsc: ^0.3.0
 
 dependencies:
-  '@3dgl/utils': 1.0.2
+  '@3dgl/utils': 1.0.3
   '@vueuse/core': 6.0.0_vue@3.2.6
   '@vueuse/head': 0.6.0_vue@3.2.6
   nprogress: 0.2.0
@@ -80,8 +80,8 @@ devDependencies:
 
 packages:
 
-  /@3dgl/utils/1.0.2:
-    resolution: {integrity: sha512-gRMTU2xviQdHxp0jw/trY9+NznyRFJ3K5c71a6C3nKlQGn4BGCiQXkSV1YgriEpJuKayD1xKaNqLAAxxkwEjxg==}
+  /@3dgl/utils/1.0.3:
+    resolution: {integrity: sha512-L/x02Kh4PT64B6qYc/SByEW+JkRhO/vHVfD1m9wx1T9PA2hPAfSUWVicXudaUgesub1AqB4bdwx+q6CV9AOfGw==}
     dev: false
 
   /@antfu/eslint-config-basic/0.7.0_eslint@7.32.0:
