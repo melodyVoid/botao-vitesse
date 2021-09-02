@@ -77,8 +77,13 @@ onMounted(() => {
   const buffer = gl.createBuffer()
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW)
-
+  /**
+   * 设置 a_Position 属性从缓冲区读取数据方式
+   */
   gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 4 * (2 + 4), 0)
+  /**
+   * 设置 a_Color 属性从缓冲区读取数据方式
+   */
   gl.vertexAttribPointer(a_Color, 2, gl.FLOAT, false, 4 * (2 + 4), 2 * 4)
 
   gl.enableVertexAttribArray(a_Position)
@@ -91,7 +96,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <ShowGL title="利用索引绘制矩形">
+  <ShowGL title="利用三角形图元绘制矩形">
     <template #canvas>
       <canvas
         ref="canvas"
