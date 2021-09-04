@@ -9,7 +9,7 @@ onMounted(() => {
   const gl = getWebGLContext(canvas.value)
 
   /**
-   * 顶点着色器
+   * 定义顶点着色器
    */
   const VERTEX_SHADER_SOURCE = `
     precision mediump float;
@@ -26,7 +26,7 @@ onMounted(() => {
   `
 
   /**
-   * 片元着色器
+   * 定义片元着色器
    */
   const FRAG_SHADER_SOURCE = `
     precision mediump float;
@@ -43,7 +43,7 @@ onMounted(() => {
   const fragShader = createShader(gl, gl.FRAGMENT_SHADER, FRAG_SHADER_SOURCE)
 
   /**
-   * 初始化程序
+   * 初始化 program
    */
   const { program } = createProgram(gl, vertexShader, fragShader)
 
@@ -57,18 +57,18 @@ onMounted(() => {
   const a_Color = gl.getAttribLocation(program, 'a_Color')
 
   /**
-   * 为顶点着色器中的 a_Screen_Size 传递 canvas 的宽高信息
+   * 传递 canvas 宽高信息
    */
   gl.vertexAttrib2f(a_Screen_Size, canvas.value.width, canvas.value.height)
 
   /**
-  * 存储顶点信息的数组
-  */
+   * 顶点信息
+   */
   const positions = [
-    30, 370, 255, 0, 0, 1, // v0
     370, 370, 255, 0, 0, 1, // v1
-    30, 30, 255, 0, 0, 1, // v2
     370, 30, 0, 255, 0, 1, // v3
+    30, 30, 255, 0, 0, 1, // v2
+    30, 370, 255, 0, 0, 1, // v0
   ]
 
   const buffer = gl.createBuffer()
@@ -92,13 +92,13 @@ onMounted(() => {
   gl.clear(gl.COLOR_BUFFER_BIT)
 
   /**
-   * 使用三角带绘制
+   * 使用三角扇绘制
    */
-  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
+  gl.drawArrays(gl.TRIANGLE_FAN, 0, positions.length / 6)
 })
 </script>
 <template>
-  <ShowGL title="使用三角带绘制矩形" link="https://codesandbox.io/s/shi-yong-san-jiao-dai-hui-zhi-ju-xing-kwc5j?autoresize=1&fontsize=14&hidenavigation=1&theme=dark">
+  <ShowGL title="使用三角扇绘制矩形" link="https://codesandbox.io/embed/13-shi-yong-san-jiao-shan-hui-zhi-ju-xing-xsylj?fontsize=14&hidenavigation=1&theme=dark">
     <template #canvas>
       <canvas
         ref="canvas"
