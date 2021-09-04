@@ -191,7 +191,7 @@ gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 4 * (2 + 4), 0)
 /**
  * 设置 a_Color 属性从缓冲区读取数据方式
  */
-gl.vertexAttribPointer(a_Color, 2, gl.FLOAT, false, 4 * (2 + 4), 2 * 4)
+gl.vertexAttribPointer(a_Color, 4, gl.FLOAT, false, 4 * (2 + 4), 2 * 4)
 
 gl.enableVertexAttribArray(a_Position)
 gl.enableVertexAttribArray(a_Color)

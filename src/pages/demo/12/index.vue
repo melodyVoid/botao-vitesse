@@ -9,7 +9,7 @@ onMounted(() => {
   const gl = getWebGLContext(canvas.value)
 
   /**
-   * 定义顶点着色器
+   * 顶点着色器
    */
   const VERTEX_SHADER_SOURCE = `
     precision mediump float;
@@ -24,8 +24,9 @@ onMounted(() => {
       v_Color = a_Color;
     }
   `
+
   /**
-   * 定义片元着色器
+   * 片元着色器
    */
   const FRAG_SHADER_SOURCE = `
     precision mediump float;
@@ -45,6 +46,7 @@ onMounted(() => {
    * 初始化程序
    */
   const { program } = createProgram(gl, vertexShader, fragShader)
+
   gl.useProgram(program)
 
   /**
@@ -60,23 +62,20 @@ onMounted(() => {
   gl.vertexAttrib2f(a_Screen_Size, canvas.value.width, canvas.value.height)
 
   /**
-   * 顶点信息
-   */
+  * 存储顶点信息的数组
+  */
   const positions = [
-    30, 30, 255, 0, 0, 1, // v0
-    30, 370, 255, 0, 0, 1, // v1
-    370, 370, 255, 0, 0, 1, // v2
-    30, 30, 0, 255, 0, 1, // v0
-    370, 370, 0, 255, 0, 1, // v2
+    30, 370, 255, 0, 0, 1, // v0
+    370, 370, 255, 0, 0, 1, // v1
+    30, 30, 255, 0, 0, 1, // v2
     370, 30, 0, 255, 0, 1, // v3
   ]
 
-  /**
-   * 创建 buffer
-   */
   const buffer = gl.createBuffer()
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
+
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW)
+
   /**
    * 设置 a_Position 属性从缓冲区读取数据方式
    */
@@ -92,11 +91,14 @@ onMounted(() => {
   gl.clearColor(0.0, 0.0, 0.0, 0.1)
   gl.clear(gl.COLOR_BUFFER_BIT)
 
-  gl.drawArrays(gl.TRIANGLES, 0, positions.length / 6)
+  /**
+   * 使用三角带绘制
+   */
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
 })
 </script>
 <template>
-  <ShowGL title="利用三角形图元绘制矩形">
+  <ShowGL title="使用三角带绘制矩形" link="https://codesandbox.io/s/shi-yong-san-jiao-dai-hui-zhi-ju-xing-kwc5j?autoresize=1&fontsize=14&hidenavigation=1&theme=dark">
     <template #canvas>
       <canvas
         ref="canvas"
@@ -109,6 +111,7 @@ onMounted(() => {
       <README />
     </template>
   </ShowGL>
+
 </template>
 <route lang="yaml">
 meta:
