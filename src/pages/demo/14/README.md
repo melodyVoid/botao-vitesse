@@ -26,6 +26,12 @@ const positions = [
 gl.enable(gl.CULL_FACE)
 ```
 
+当然，我们也可以更改面的显示方式，默认显示正面，我们可以通过如下方式，剔除正面，只显示背面：
+
+```js
+gl.cullFace(gl.FRONT)
+```
+
 [![Edit 14-顶点顺序](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/14-ding-dian-shun-xu-hn50r?fontsize=14&hidenavigation=1&theme=dark)
 
 ## 完整代码
