@@ -3,7 +3,8 @@ import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
-import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import ViteComponents from 'vite-plugin-components'
 import Markdown from 'vite-plugin-md'
 import WindiCSS from 'vite-plugin-windicss'
@@ -60,7 +61,7 @@ export default defineConfig({
       // auto import icons
       customComponentResolvers: [
         // https://github.com/antfu/vite-plugin-icons
-        ViteIconsResolver({
+        IconsResolver({
           componentPrefix: '',
           // enabledCollections: ['carbon']
         }),
@@ -68,7 +69,7 @@ export default defineConfig({
     }),
 
     // https://github.com/antfu/vite-plugin-icons
-    ViteIcons(),
+    Icons(),
 
     // https://github.com/antfu/vite-plugin-windicss
     WindiCSS({
