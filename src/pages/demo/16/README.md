@@ -215,3 +215,177 @@ gl.uniform1i(uniformTexture, 0)
 ```
 
 > 这里我们为片元着色器的 texture 属性传递 0，此处应该与激活纹理时的通道值保持一致。
+
+图片作为纹理的渲染效果如下：
+
+![](https://files.catbox.moe/5ejb65.png)
+
+可以看到，我们绘制的矩形表面贴上了纹理。
+
+思考：为什么只是指定了三角形的顶点对应的 UV 坐标，GPU 就能够将纹理图片的其他坐标的颜色贴到三角形表面呢？
+
+渲染管线光栅化环节上，GPU 处理两件事情：
+
+- 计算图元覆盖了哪些像素。
+- 根据顶点着色器的定点位置计算每个像素的纹理坐标的插值。
+
+> 注：片元可以理解为像素。
+
+光栅化结束后，来到片元着色器，片元着色器此时知道每个像素对应的 UV 坐标，根据当前像素的 UV 坐标，找到纹理资源对应坐标的颜色信息，赋值给当前像素，从而能够为图元表面的每个像素贴上正确的纹理颜色。
+
+## 注意事项
+
+- 图片最好满足 2^m x 2^n 的尺寸要求。
+- 图片数据首先加载到内存中，才能够在纹理中使用。
+- 图片资源加载前要先解决跨域问题。
+
+
+[![Edit 16-纹理贴图](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/16-wen-li-tie-tu-4vvng?fontsize=14&hidenavigation=1&theme=dark)
+
+## 完整代码
+
+```ts
+import {
+  getWebGLContext,
+  createShader,
+  createProgram,
+  loadTexture,
+} from '@3dgl/utils'
+const canvas = document.querySelector<HTMLCanvasElement>('#canvas')
+
+if (canvas === null) {
+  throw new Error('canvas is null')
+}
+
+const gl = getWebGLContext(canvas)
+
+/**
+ * 顶点着色器
+ */
+const VERTEX_SHADER_SOURCE = `
+  precision mediump float;
+  attribute vec2 a_Position;
+  attribute vec2 a_Screen_Size;
+  attribute vec2 a_Uv;
+  varying vec2 v_Uv;
+  void main() {
+    vec2 position = (a_Position / a_Screen_Size) * 2.0 - 1.0;
+    position = position * vec2(1.0, -1.0);
+    gl_Position = vec4(position, 0, 1);
+    v_Uv = a_Uv;
+  }
+`
+
+/**
+ * 定义片元着色器
+ */
+const FRAG_SHADER_SOURCE = `
+  precision mediump float;
+  varying vec2 v_Uv;
+  uniform sampler2D u_Texture;
+  void main() {
+    gl_FragColor = texture2D(u_Texture, vec2(v_Uv.x, v_Uv.y));
+  }
+`
+
+/**
+ * 初始化着色器
+ */
+const vertexShader = createShader(gl, gl.VERTEX_SHADER, VERTEX_SHADER_SOURCE)
+const fragShader = createShader(gl, gl.FRAGMENT_SHADER, FRAG_SHADER_SOURCE)
+
+/**
+ * 初始化程序
+ */
+const { program } = createProgram(gl, vertexShader, fragShader)
+
+gl.useProgram(program)
+
+/**
+ * 准备数据
+ */
+const a_Position = gl.getAttribLocation(program, 'a_Position')
+const a_Screen_Size = gl.getAttribLocation(program, 'a_Screen_Size')
+const a_Uv = gl.getAttribLocation(program, 'a_Uv')
+/**
+ * 找到着色器中的全局变量 u_Texture
+ */
+const u_Texture = gl.getUniformLocation(program, 'u_Texture')
+
+/**
+ * 顶点数据
+ */
+const positions = [
+  30,
+  30,
+  0,
+  0, // v0
+  30,
+  370,
+  0,
+  1, // v1
+  370,
+  370,
+  1,
+  1, // v2
+  30,
+  30,
+  0,
+  0, // v0
+  370,
+  370,
+  1,
+  1, // v2
+  370,
+  30,
+  1,
+  0, // v3
+]
+
+gl.vertexAttrib2f(a_Screen_Size, canvas.width, canvas.height)
+
+gl.enableVertexAttribArray(a_Position)
+gl.enableVertexAttribArray(a_Uv)
+
+/**
+ * 创建缓冲区
+ */
+const buffer = gl.createBuffer()
+/**
+ * 绑定缓冲区为当前缓冲
+ */
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
+
+/**
+ * 设置 a_Position 属性从缓冲区读取数据方式
+ */
+gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 4 * (2 + 2), 0)
+/**
+ * 设置 a_Uv 属性从缓冲区读取数据方式
+ */
+gl.vertexAttribPointer(a_Uv, 2, gl.FLOAT, false, 4 * (2 + 2), 4 * 2)
+
+/**
+ * 向缓冲区传入数据
+ */
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW)
+
+/**
+ * 清空绘图区
+ */
+gl.clearColor(0.0, 0.0, 0.0, 0.1)
+
+const render = () => {
+  gl.clear(gl.COLOR_BUFFER_BIT)
+  /**
+   * 绘制
+   */
+  gl.drawArrays(gl.TRIANGLES, 0, positions.length / 4)
+}
+
+render()
+
+loadTexture(gl, 'https://files.catbox.moe/jiekom.jpeg', u_Texture, () => {
+  render()
+})
+```

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { createProgram, createShader, getWebGLContext } from '@3dgl/utils'
+import { createProgram, createShader, getWebGLContext, loadTexture } from '@3dgl/utils'
 import README from './README.md'
+// import img from './wave.jpeg'
 const canvas = ref<HTMLCanvasElement | null>(null)
 
 onMounted(() => {
@@ -19,7 +20,7 @@ onMounted(() => {
     varying vec2 v_Uv;
     void main() {
       vec2 position = (a_Position / a_Screen_Size) * 2.0 - 1.0;
-      position = position * vec2(1, 0, -1.0);
+      position = position * vec2(1.0, -1.0);
       gl_Position = vec4(position, 0, 1);
       v_Uv = a_Uv;
     }
@@ -33,7 +34,7 @@ onMounted(() => {
     varying vec2 v_Uv;
     uniform sampler2D u_Texture;
     void main() {
-      gl_FragColor = texture2D(u_Texture, vec2(v_Uv.x, v_Uv.y))
+      gl_FragColor = texture2D(u_Texture, vec2(v_Uv.x, v_Uv.y));
     }
   `
 
@@ -65,12 +66,30 @@ onMounted(() => {
    * 顶点数据
    */
   const positions = [
-    30, 30, 0, 0, // v0
-    30, 370, 0, 1, // v1
-    370, 370, 1, 1, // v2
-    30, 30, 0, 0, // v0
-    370, 370, 1, 1, // v2
-    370, 30, 1, 0, // v3
+    30,
+    30,
+    0,
+    0, // v0
+    30,
+    370,
+    0,
+    1, // v1
+    370,
+    370,
+    1,
+    1, // v2
+    30,
+    30,
+    0,
+    0, // v0
+    370,
+    370,
+    1,
+    1, // v2
+    370,
+    30,
+    1,
+    0, // v3
   ]
 
   gl.vertexAttrib2f(a_Screen_Size, canvas.value.width, canvas.value.height)
@@ -109,26 +128,20 @@ onMounted(() => {
   const render = () => {
     gl.clear(gl.COLOR_BUFFER_BIT)
     /**
-   * 绘制
-   */
+     * 绘制
+     */
     gl.drawArrays(gl.TRIANGLES, 0, positions.length / 4)
   }
 
   render()
 
-  const loadTexture = (gl: WebGLRenderingContext, src: string, texture: WebGLUniformLocation, callback: () => void) => {
-    const img = new Image()
-    img.src = src
-    img.onload = callback
-  }
-
-  loadTexture(gl, '', u_Texture, () => {
+  loadTexture(gl, 'https://files.catbox.moe/jiekom.jpeg', u_Texture, () => {
     render()
   })
 })
 </script>
 <template>
-  <ShowGL title="纹理贴图">
+  <ShowGL title="纹理贴图" link="https://codesandbox.io/embed/16-wen-li-tie-tu-4vvng?fontsize=14&hidenavigation=1&theme=dark">
     <template #canvas>
       <canvas
         ref="canvas"
