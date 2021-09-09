@@ -17,6 +17,7 @@ const demos = [
   { title: '14-顶点顺序', path: '/demo/14' },
   { title: '15-绘制圆形', path: '/demo/15' },
   { title: '16-纹理贴图', path: '/demo/16' },
+  { title: '17-绘制立方体', path: '/demo/17' },
 ]
 
 </script>

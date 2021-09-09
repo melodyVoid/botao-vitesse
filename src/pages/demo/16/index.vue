@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { createProgram, createShader, getWebGLContext, loadTexture } from '@3dgl/utils'
+import {
+  createProgram,
+  createShader,
+  getWebGLContext,
+  loadTexture,
+} from '@3dgl/utils'
 import README from './README.md'
 // import img from './wave.jpeg'
 const canvas = ref<HTMLCanvasElement | null>(null)
@@ -141,7 +146,10 @@ onMounted(() => {
 })
 </script>
 <template>
-  <ShowGL title="纹理贴图" link="https://codesandbox.io/embed/16-wen-li-tie-tu-4vvng?fontsize=14&hidenavigation=1&theme=dark">
+  <ShowGL
+    title="纹理贴图"
+    link="https://codesandbox.io/embed/16-wen-li-tie-tu-4vvng?fontsize=14&hidenavigation=1&theme=dark"
+  >
     <template #canvas>
       <canvas
         ref="canvas"
