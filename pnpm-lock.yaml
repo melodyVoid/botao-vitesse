@@ -1,6 +1,8 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@3dgl/math': ^1.0.0
+  '@3dgl/matrix': ^1.0.0
   '@3dgl/utils': 1.0.4
   '@antfu/eslint-config': ^0.7.0
   '@iconify/json': ^1.1.393
@@ -39,6 +41,8 @@ specifiers:
   vue-tsc: ^0.3.0
 
 dependencies:
+  '@3dgl/math': 1.0.0
+  '@3dgl/matrix': 1.0.0
   '@3dgl/utils': 1.0.4
   '@vueuse/core': 6.1.0_vue@3.2.8
   '@vueuse/head': 0.6.0_vue@3.2.8
@@ -79,6 +83,14 @@ devDependencies:
   vue-tsc: 0.3.0_typescript@4.4.2
 
 packages:
+
+  /@3dgl/math/1.0.0:
+    resolution: {integrity: sha512-Gc0Pgll4xaWdjWQhyk5O8nszvZenpXFurlIQ20HElylWnfEJ32kFKauCwuTpyfWyHY3wUI5JeoDdx/hc45tb1w==}
+    dev: false
+
+  /@3dgl/matrix/1.0.0:
+    resolution: {integrity: sha512-4Trnae15+prbs1VKQGDVc3orl6hXa6DMgOyXCpykHtzuPLhwtOOH1tumEzfSNt3TagD7ynqGjnUhmR017yRFFg==}
+    dev: false
 
   /@3dgl/utils/1.0.4:
     resolution: {integrity: sha512-wGnwSR4ooju08FLJyqlSETjE+xmfCcwxVJVxLHiFQOx0LRP9aur5TQRyjssPitNZp7jIKWOLbCWwXsv9x5aHzg==}

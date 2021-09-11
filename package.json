@@ -8,6 +8,8 @@
     "preview-https": "serve dist"
   },
   "dependencies": {
+    "@3dgl/math": "^1.0.0",
+    "@3dgl/matrix": "^1.0.0",
     "@3dgl/utils": "1.0.4",
     "@vueuse/core": "^6.0.0",
     "@vueuse/head": "^0.6.0",
