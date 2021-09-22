@@ -173,3 +173,5 @@ const u_LightColor = gl.getUniformLocation(program, 'u_LightColor)
 ![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/10/10/1665d30d064c856f~tplv-t2oaga2asx-watermark.awebp)
 
 可以看到，在不同颜色的光线照射下，人眼观察到的物体颜色也会不同。
+
+[![Edit 18-用计算机表示光照](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/18-yong-ji-suan-ji-biao-shi-guang-zhao-5ps4l?fontsize=14&hidenavigation=1&theme=dark)

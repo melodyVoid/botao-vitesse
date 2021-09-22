@@ -18,6 +18,7 @@ const demos = [
   { title: '15-绘制圆形', path: '/demo/15' },
   { title: '16-纹理贴图', path: '/demo/16' },
   { title: '17-绘制立方体', path: '/demo/17' },
+  { title: '18-用计算机表示光照', path: '/demo/18' },
 ]
 
 </script>

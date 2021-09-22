@@ -238,7 +238,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <ShowGL title="光照">
+  <ShowGL title="光照" link="https://codesandbox.io/embed/18-yong-ji-suan-ji-biao-shi-guang-zhao-5ps4l?fontsize=14&hidenavigation=1&theme=dark">
     <template #canvas>
       <div class="w-full text-left">
         环境光强度:
