@@ -136,6 +136,8 @@ gl.drawArrays(mode, first, count);
 - count，代表绘制的点的数量。
 ```
 
+[![Edit 02-绘制一个点](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/02-hui-zhi-yi-ge-dian-cm4jn?fontsize=14&hidenavigation=1&theme=dark)
+
 ## 完整代码
 
 ```js

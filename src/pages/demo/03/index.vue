@@ -43,7 +43,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <ShowGL title="优化绘制一个点（代码优化）">
+  <ShowGL title="优化绘制一个点（代码优化）" link="https://codesandbox.io/embed/03-hui-zhi-yi-ge-dian-you-hua-4ghhq?fontsize=14&hidenavigation=1&theme=dark">
     <template #canvas>
       <canvas ref="canvas" width="400" height="400" class="w-80 sm:w-[400px]"></canvas>
     </template>

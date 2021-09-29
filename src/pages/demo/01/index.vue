@@ -16,7 +16,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <ShowGL title="清空绘图区">
+  <ShowGL title="清空绘图区" link="https://codesandbox.io/embed/01-qing-kong-hui-tu-qu-ln1li?fontsize=14&hidenavigation=1&theme=dark">
     <template #canvas>
       <canvas ref="canvas" width="400" height="400" class="w-80 sm:w-[400px]"></canvas>
     </template>

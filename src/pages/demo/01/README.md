@@ -22,6 +22,10 @@ WebGL 中的颜色值可以通过 `普通颜色分量值 / 255` 得到。
 
 如果没有指定背景色，默认为无色 `gl.clearColor(0.0, 0.0, 0.0, 0.0)`
 
+[![Edit 01-清空绘图区](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/01-qing-kong-hui-tu-qu-ln1li?fontsize=14&hidenavigation=1&theme=dark)
+
+## 完整代码
+
 ```js
 /**
  * 获取 canvas 元素

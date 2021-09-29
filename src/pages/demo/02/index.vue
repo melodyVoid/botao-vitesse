@@ -70,7 +70,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <ShowGL title="绘制一个点">
+  <ShowGL title="绘制一个点" link="https://codesandbox.io/embed/02-hui-zhi-yi-ge-dian-cm4jn?fontsize=14&hidenavigation=1&theme=dark">
     <template #canvas>
       <canvas ref="canvas" width="400" height="400" class="w-80 sm:w-[400px]"></canvas>
     </template>

@@ -116,6 +116,8 @@ export const createProgram = (
 
 有个这三个工具函数，我们再写绘制一个点的代码就会简单很多。工具函数已经发布到 npm 上，👉 [@3dgl/utils](https://www.npmjs.com/package/@3dgl/utils)
 
+[![Edit 03-绘制一个点（优化）](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/03-hui-zhi-yi-ge-dian-you-hua-4ghhq?fontsize=14&hidenavigation=1&theme=dark)
+
 ## 优化后的代码
 
 ```js
