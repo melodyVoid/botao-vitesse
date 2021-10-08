@@ -33,6 +33,7 @@
     "cross-env": "^7.0.3",
     "eslint": "^7.32.0",
     "https-localhost": "^4.6.5",
+    "markdown-it-latex2img": "^0.0.6",
     "markdown-it-link-attributes": "^3.0.0",
     "markdown-it-prism": "^2.2.0",
     "pnpm": "^6.14.3",

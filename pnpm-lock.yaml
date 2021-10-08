@@ -17,6 +17,7 @@ specifiers:
   cross-env: ^7.0.3
   eslint: ^7.32.0
   https-localhost: ^4.6.5
+  markdown-it-latex2img: ^0.0.6
   markdown-it-link-attributes: ^3.0.0
   markdown-it-prism: ^2.2.0
   nprogress: ^0.2.0
@@ -66,6 +67,7 @@ devDependencies:
   cross-env: 7.0.3
   eslint: 7.32.0
   https-localhost: 4.6.5
+  markdown-it-latex2img: registry.npmmirror.com/markdown-it-latex2img/0.0.6
   markdown-it-link-attributes: 3.0.0
   markdown-it-prism: 2.2.0
   pnpm: 6.14.6
@@ -6636,4 +6638,10 @@ packages:
       string-width: 4.2.2
       y18n: 5.0.8
       yargs-parser: 20.2.9
+    dev: true
+
+  registry.npmmirror.com/markdown-it-latex2img/0.0.6:
+    resolution: {integrity: sha1-qJZxM7VSPw8jSQ13QHL6oFX6+e4=, registry: https://npm.xesv5.com/, tarball: https://registry.npmmirror.com/markdown-it-latex2img/download/markdown-it-latex2img-0.0.6.tgz}
+    name: markdown-it-latex2img
+    version: 0.0.6
     dev: true

@@ -13,6 +13,8 @@ import { VitePWA } from 'vite-plugin-pwa'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Prism from 'markdown-it-prism'
 // @ts-expect-error missing types
+import markdownItLatex from 'markdown-it-latex2img'
+// @ts-expect-error missing types
 import LinkAttributes from 'markdown-it-link-attributes'
 
 const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
@@ -84,6 +86,7 @@ export default defineConfig({
       markdownItSetup(md) {
         // https://prismjs.com/
         md.use(Prism)
+        md.use(markdownItLatex)
         md.use(LinkAttributes, {
           pattern: /^https?:\/\//,
           attrs: {
