@@ -8,6 +8,7 @@ specifiers:
   '@iconify/json': ^1.1.393
   '@intlify/vite-plugin-vue-i18n': ^2.4.0
   '@types/nprogress': ^0.2.0
+  '@types/three': ^0.133.1
   '@vitejs/plugin-vue': ^1.6.0
   '@vue/compiler-sfc': ^3.2.6
   '@vue/server-renderer': ^3.2.6
@@ -24,6 +25,7 @@ specifiers:
   pinia: ^2.0.0-rc.6
   pnpm: ^6.14.3
   prism-theme-vars: ^0.2.2
+  three: ^0.133.1
   typescript: ^4.3.5
   unplugin-auto-import: ^0.1.5
   unplugin-icons: ^0.7.5
@@ -50,6 +52,7 @@ dependencies:
   nprogress: 0.2.0
   pinia: 2.0.0-rc.7_typescript@4.4.2+vue@3.2.8
   prism-theme-vars: 0.2.2
+  three: registry.npmmirror.com/three/0.133.1
   vue: 3.2.8
   vue-demi: 0.11.3_vue@3.2.8
   vue-i18n: 9.1.7_vue@3.2.8
@@ -60,6 +63,7 @@ devDependencies:
   '@iconify/json': 1.1.397
   '@intlify/vite-plugin-vue-i18n': 2.4.0_vite@2.5.3+vue-i18n@9.1.7
   '@types/nprogress': 0.2.0
+  '@types/three': 0.133.1
   '@vitejs/plugin-vue': 1.6.0_@vue+compiler-sfc@3.2.8
   '@vue/compiler-sfc': 3.2.8
   '@vue/server-renderer': 3.2.8_vue@3.2.8
@@ -1585,6 +1589,10 @@ packages:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
     dependencies:
       '@types/node': 16.7.10
+    dev: true
+
+  /@types/three/0.133.1:
+    resolution: {integrity: sha1-YAf6r39rUzORUKKh/lcSHkxmB8E=}
     dev: true
 
   /@types/throttle-debounce/2.1.0:
@@ -6645,3 +6653,9 @@ packages:
     name: markdown-it-latex2img
     version: 0.0.6
     dev: true
+
+  registry.npmmirror.com/three/0.133.1:
+    resolution: {integrity: sha1-Vgb0gX1noJ2SEtTMvWgmVkd0+PQ=, registry: https://npm.xesv5.com/, tarball: https://registry.npmmirror.com/three/download/three-0.133.1.tgz}
+    name: three
+    version: 0.133.1
+    dev: false
