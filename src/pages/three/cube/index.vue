@@ -10,6 +10,7 @@
 import * as THREE from 'three'
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import Stats from 'three/examples/jsm/libs/stats.module'
 import { nextTick } from 'vue'
 
 window.requestAnimFrame = (function() { // 如果有变化则可能还需要requestAnimationFrame刷新
@@ -45,6 +46,7 @@ export default {
   data() {
     return {
       renderer: null,
+      stats: null,
       width: null,
       height: null,
       controls: null,
@@ -106,13 +108,11 @@ export default {
         this.mouse.x = (event.clientX / this.width) * 2 - 1
         this.mouse.y = -(event.clientY / this.height) * 2 + 1
       }
-      console.log(this.mouse)
       this.rayCaster.setFromCamera(this.mouse, this.camera)
       // Raycaster方式定位选取元素，可能会选取多个，以第一个为准
       const intersects = this.rayCaster.intersectObjects(scene.children)
       if (intersects.length) {
         try {
-          console.log(intersects)
           if (intersects[0].object.cubeType === 'coverCube') {
             this.intersect = intersects[1]
             this.normalize = intersects[0].face.normal
@@ -420,6 +420,8 @@ export default {
 
     // 根据方向获得运动元素
     getBoxs(target, direction) {
+      console.log('target');
+      console.log(target);
       let targetId = target.object.cubeIndex
       const ids = []
       for (let i = 0; i < cubes.length; i++)
@@ -490,6 +492,8 @@ export default {
       this.renderer = new THREE.WebGLRenderer()
       this.renderer.setSize(this.width, this.height)
       this.renderer.setClearColor(0x000000, 1.0)
+      this.stats = new Stats()
+      document.body.appendChild(this.stats.dom)
       document.getElementById('three').appendChild(this.renderer.domElement)
     },
 
@@ -544,6 +548,7 @@ export default {
     // 渲染
     render() {
       this.renderer.render(scene, this.camera)
+      this.stats.update()
       window.requestAnimFrame(this.render)
     },
 

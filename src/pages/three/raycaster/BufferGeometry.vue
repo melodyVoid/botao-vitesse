@@ -5,10 +5,18 @@
 
 <script>
 import * as THREE from 'three'
+import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
 let container
 let camera, scene, renderer
 let raycaster, pointer
 let mesh, line
+const controls = {
+  x: 0.1,
+  y: 0.2,
+}
+const gui = new GUI()
+gui.add(controls, 'x', 0, Math.PI)
+gui.add(controls, 'y', 0, Math.PI)
 export default {
   name: 'BufferGeometry',
   mounted() {
@@ -166,16 +174,16 @@ export default {
       this.render()
     },
     render() {
-      const time = Date.now() * 0.001
+      // const time = Date.now() * 0.001
 
-      mesh.rotation.x = time * 0.15
-      mesh.rotation.y = time * 0.25
+      mesh.rotation.x = controls.x
+      mesh.rotation.y = controls.y
       raycaster.setFromCamera(pointer, camera)
       const intersects = raycaster.intersectObject(mesh)
       if (intersects.length > 0) {
         const intersect = intersects[0]
         const face = intersect.face
-        console.log(face);
+        console.log(face)
         const linePosition = line.geometry.attributes.position
         const meshPosition = mesh.geometry.attributes.position
         linePosition.copyAt(0, meshPosition, face.a)
