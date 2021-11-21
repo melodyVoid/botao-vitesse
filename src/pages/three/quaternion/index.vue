@@ -52,8 +52,10 @@ export default {
       const rad = 0.02
       const x0 = cube.position.x
       const z0 = cube.position.z
+      // 自身旋转
       q.setFromAxisAngle(new THREE.Vector3(0, 1, 0), rad)
       cube.quaternion.premultiply(q)
+      // 世界左边变换
       cube.position.x = Math.cos(rad) * x0 + Math.sin(rad) * z0
       cube.position.z = Math.cos(rad) * z0 - Math.sin(rad) * x0
       renderer.render(scene, camera)
