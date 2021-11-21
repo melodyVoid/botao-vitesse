@@ -6,6 +6,7 @@
 <script>
 
 import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 let renderer, scene, camera, cube
 export default {
   name: 'Index',
@@ -48,13 +49,13 @@ export default {
     },
     render() {
       const q = new THREE.Quaternion()
-      const angle = Math.PI / 2
-      q.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.PI / 2)
+      const rad = 0.02
+      const x0 = cube.position.x
+      const z0 = cube.position.z
+      q.setFromAxisAngle(new THREE.Vector3(0, 1, 0), rad)
       cube.quaternion.premultiply(q)
-      // // obj.rotateY(rad);
-      // cube.position.x = Math.cos(angle) * cube.position.x - Math.sin(angle) * cube.position.y
-      // cube.position.y = Math.cos(angle) * cube.position.y + Math.sin(angle) * cube.position.x
-      cube.quaternion.slerp(q, 0.2)
+      cube.position.x = Math.cos(rad) * x0 + Math.sin(rad) * z0
+      cube.position.z = Math.cos(rad) * z0 - Math.sin(rad) * x0
       renderer.render(scene, camera)
     },
   },
