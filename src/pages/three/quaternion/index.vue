@@ -25,6 +25,7 @@ export default {
       const material = new THREE.MeshBasicMaterial({ color: 'red' })
       cube = new THREE.Mesh(geometry, material)
       cube.position.x = 100
+      cube.position.y = 100
       scene.add(cube)
       // 环境光会均匀的照亮场景中的所有物体。环境光不能用来投射阴影，因为它没有方向。
       scene.add(new THREE.AmbientLight(0xFFFFFF))
@@ -42,6 +43,8 @@ export default {
       renderer.setSize(window.innerWidth, window.innerHeight)
       container.appendChild(renderer.domElement)
       // renderer.render(scene, camera)
+      const controls = new OrbitControls(camera, renderer.domElement)// 创建控件对象
+      controls.addEventListener('change', this.render)// 监听鼠标、键盘事件
     },
     animate() {
       requestAnimationFrame(this.animate)
@@ -49,15 +52,16 @@ export default {
     },
     render() {
       const q = new THREE.Quaternion()
-      const rad = 0.02
+      const rad = Math.PI / 90
       const x0 = cube.position.x
       const z0 = cube.position.z
       // 自身旋转
-      q.setFromAxisAngle(new THREE.Vector3(0, 1, 0), rad)
+      q.setFromAxisAngle(new THREE.Vector3(1, 1, 1), rad)
       cube.quaternion.premultiply(q)
-      // 世界左边变换
-      cube.position.x = Math.cos(rad) * x0 + Math.sin(rad) * z0
-      cube.position.z = Math.cos(rad) * z0 - Math.sin(rad) * x0
+      // 世界坐标变换
+      // cube.position.x = Math.cos(rad) * x0 + Math.sin(rad) * z0
+      // cube.position.z = Math.cos(rad) * z0 - Math.sin(rad) * x0
+
       renderer.render(scene, camera)
     },
   },
