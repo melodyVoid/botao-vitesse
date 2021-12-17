@@ -17,13 +17,15 @@ const k = width / height // 窗口宽高比
 let sun // 太阳对象
 let earth // 地球
 let moon // 月球
+let raycaster
+const pointer = new THREE.Vector2()
 
 const controls = {
-  太阳旋转速度: 0.02,
-  地球旋转速度: 0.02,
-  地球公转速度: 0.02,
-  月球公转速度: 0.02,
-  月球旋转速度: 0.02,
+  太阳旋转速度: 0,
+  地球旋转速度: 0,
+  地球公转速度: 0,
+  月球公转速度: 0,
+  月球旋转速度: 0,
 }
 const gui = new GUI()
 gui.add(controls, '太阳旋转速度', 0, 0.2)
@@ -64,6 +66,8 @@ export default defineComponent(
         const sunTexture = loader.load('/stars/sun.png')
         const sunMaterial = new THREE.MeshLambertMaterial({ map: sunTexture })
         sun = new THREE.Mesh(sunGeometry, sunMaterial)
+        sun.name = 'sun'
+        console.log(sun)
         scene.add(sun)
         /**
          * 创建标签
@@ -107,6 +111,7 @@ export default defineComponent(
           specular: 0xFF0000, // 高光部分的颜色
         })
         earth = new THREE.Mesh(earthGeometry, earthMaterial)
+        earth.name = 'earth'
         earth.position.x = 200
         earth.rotateZ(-(Math.PI / 8))
         scene.add(earth)
@@ -121,6 +126,7 @@ export default defineComponent(
           map: moonTexture,
         })
         moon = new THREE.Mesh(moonGeometry, moonMaterial)
+        moon.name = 'moon'
         moon.position.x = 50
         moonGroup = new THREE.Group()
         moonGroup.position.x = 300
@@ -157,6 +163,9 @@ export default defineComponent(
         // 视角工具
         const orbitControls = new OrbitControls(camera, renderer.domElement)// 创建控件对象
         orbitControls.addEventListener('change', this.orbitRender)// 监听鼠标、键盘事件
+        // 碰撞检测
+        raycaster = new THREE.Raycaster()
+        document.addEventListener('click', this.onPointerClick)
         // 控制台
       },
       orbitRender() {
@@ -190,6 +199,33 @@ export default defineComponent(
         earth.position.z = Math.cos(revolution) * z0 - Math.sin(revolution) * x0
         moonGroup.position.x = earth.position.x
         moonGroup.position.z = earth.position.z
+      },
+      /**
+       * 监听鼠标点击事件。并处理
+       * document.addEventListener('mousemove', this.onPointerMove)
+       * @param event
+       */
+      onPointerClick(event) {
+        // https://juejin.cn/post/7021519175898103845
+        const canves = document.getElementById('sun-system')
+        const canvesWidth = canves.getBoundingClientRect().width
+        const canvesHeight = canves.getBoundingClientRect().height
+        const top = canves.getBoundingClientRect().top
+        const left = canves.getBoundingClientRect().left
+        const right = canves.getBoundingClientRect().right
+        // pointer.x = ((event.clientX) / window.innerWidth) * 2 - 1
+        // pointer.y = -((event.clientY) / window.innerHeight) * 2 + 1
+        // 坐标归一化
+        pointer.x = ((event.clientX - (left) - (right - canvesWidth)) / canvesWidth) * 2 - 1
+        pointer.y = -((event.clientY - top) / canvesHeight) * 2 + 1
+        raycaster.setFromCamera(pointer, camera)
+        const intersects = raycaster.intersectObjects(scene.children, true)
+        if (intersects.length > 0) {
+          for (const { object } of intersects) {
+            if (object.name !== '')
+              alert(object.name)
+          }
+        }
       },
     },
   },
